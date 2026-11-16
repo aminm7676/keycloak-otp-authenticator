@@ -65,6 +65,7 @@ public final class RabbitMqOtpAuthenticator implements Authenticator {
                     Long.toString(System.currentTimeMillis() + OTP_LIFETIME.toMillis()));
             authenticationSession.setAuthNote(ATTEMPTS_NOTE, "0");
 
+            // publisher.publish(context.getUser().getId(), context.getUser().getUsername(), otp);
             String phoneNumber = context.getUser().getFirstAttribute("phoneNumber");
 
             if (phoneNumber == null || phoneNumber.isBlank()) {
