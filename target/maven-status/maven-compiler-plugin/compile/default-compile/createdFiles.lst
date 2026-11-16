@@ -1,0 +1,5 @@
+com\example\keycloak\otp\RabbitMqOtpAuthenticator.class
+com\example\keycloak\otp\RabbitMqOtpPublisher.class
+com\example\keycloak\otp\RabbitMqOtpPublisher$Settings.class
+com\example\keycloak\otp\RabbitMqOtpAuthenticator$StoredChallenge.class
+com\example\keycloak\otp\RabbitMqOtpAuthenticatorFactory.class
