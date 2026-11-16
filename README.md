@@ -13,6 +13,8 @@ RabbitMQ settings are read from environment variables:
 - `RABBITMQ_VHOST` (default `/`)
 - `RABBITMQ_QUEUE` (default `keycloak.otp`)
 - `RABBITMQ_CONNECTION_TIMEOUT_MS` (default `5000`)
+- `TOTP_SERVER_SECRET` (default `eqwhkjehqwA$anP@rdakht!20sa.`)
+
 
 The durable queue is declared by the provider. Published JSON contains `userId`,
 `username`, and `otp`. The OTP lifetime is five minutes with at most five attempts.
