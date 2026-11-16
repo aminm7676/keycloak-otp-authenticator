@@ -73,12 +73,10 @@ public final class RabbitMqOtpAuthenticator implements Authenticator {
                 return;
             }
 
-            publisher.publish(
-                context.getUser().getId(),
-                phoneNumber,
-                otp,
-                (int) OTP_LIFETIME.toMinutes()
+            publisher.publish(context.getUser().getId(),phoneNumber,otp,(int) OTP_LIFETIME.toMinutes());
+
             context.challenge(form(context).createForm(FORM_TEMPLATE));
+            
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
             failClosed(context);
