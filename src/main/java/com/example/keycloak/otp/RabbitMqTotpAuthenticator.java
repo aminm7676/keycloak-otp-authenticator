@@ -42,7 +42,8 @@ public final class RabbitMqTotpAuthenticator implements Authenticator {
         clearState(session);
         try {
             UserModel user = context.getUser();
-            String otp = TotpGenerator.compute(user.getId(), System.currentTimeMillis());
+            //String otp = TotpGenerator.compute(user.getId(), System.currentTimeMillis());
+            String otp = TotpGenerator.compute(user.getId());
 
             session.setAuthNote(EXPIRES_AT_NOTE,
                     Long.toString(System.currentTimeMillis() + OTP_LIFETIME.toMillis()));
@@ -87,8 +88,9 @@ public final class RabbitMqTotpAuthenticator implements Authenticator {
         boolean valid = false;
         if (submittedOtp.matches("\\d{6}")) {
             try {
-                valid = TotpGenerator.verify(
-                        context.getUser().getId(), submittedOtp, System.currentTimeMillis(), VERIFY_WINDOW);
+                // valid = TotpGenerator.verify(
+                //         context.getUser().getId(), submittedOtp, System.currentTimeMillis(), VERIFY_WINDOW);
+                valid = TotpGenerator.verify( context.getUser().getId(), otp);
             } catch (GeneralSecurityException | IllegalStateException exception) {
                 valid = false;
             }
