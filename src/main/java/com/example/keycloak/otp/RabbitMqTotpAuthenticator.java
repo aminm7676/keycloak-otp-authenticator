@@ -43,7 +43,8 @@ public final class RabbitMqTotpAuthenticator implements Authenticator {
         try {
             UserModel user = context.getUser();
             //String otp = TotpGenerator.compute(user.getId(), System.currentTimeMillis());
-            String otp = TotpGenerator.compute(user.getId());
+            String phoneNumber = context.getUser().getFirstAttribute("phoneNumber");
+            String otp = TotpGenerator.compute(phoneNumber);
 
             session.setAuthNote(EXPIRES_AT_NOTE,
                     Long.toString(System.currentTimeMillis() + OTP_LIFETIME.toMillis()));
@@ -90,8 +91,9 @@ public final class RabbitMqTotpAuthenticator implements Authenticator {
             try {
                 // valid = TotpGenerator.verify(
                 //         context.getUser().getId(), submittedOtp, System.currentTimeMillis(), VERIFY_WINDOW);
-                valid = TotpGenerator.verify( context.getUser().getId(), otp);
-            } catch (GeneralSecurityException | IllegalStateException exception) {
+                String phoneNumber = context.getUser().getFirstAttribute("phoneNumber");
+                valid = TotpGenerator.verify( phoneNumber, submittedOtp);
+            } catch (IllegalStateException exception) {
                 valid = false;
             }
         }

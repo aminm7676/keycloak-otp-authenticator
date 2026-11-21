@@ -1,3 +1,4 @@
+package com.example.keycloak.otp;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.ByteBuffer;
